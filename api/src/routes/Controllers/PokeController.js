@@ -1,4 +1,3 @@
-
 const { Pokemon, Types } = require("../../db");
 const axios = require("axios");
 
@@ -23,14 +22,17 @@ const pokeObj = (p) => {
   const pokeObj = {
     id: p.id,
     name: p.name,
-    sprites:p.sprites.other.dream_world.front_default,
+    img: p.sprites.other.dream_world.front_default,
     healthPoints: p.healthPoints,
     attack: p.stats[1].base_stat,
     defense: p.stats[2].base_stat,
     speed: p.stats[5].base_stat,
     height: p.height,
     weight: p.weight,
-    types: p.types.length < 2 ? [{ name: p.types[0].type.name}] : [{ name: p.types[0].type.name}, { name: p.types[1].type.name}],
+    types:
+      p.types.length < 2
+        ? [{ name: p.types[0].type.name }]
+        : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
   };
   return pokeObj;
 };
@@ -38,8 +40,13 @@ const pokeObj = (p) => {
 const getPokeDB = async () => {
   try {
     return await Pokemon.findAll({
-      include: Types,
-      attributes: ['name'],
+      include: {
+        model: Types,
+        attributes: ['name'],
+        through: {
+          attributes: [],
+        },
+      },
     });
   } catch (error) {
     console.log("Hay un error en la base de datos!", error);
@@ -50,7 +57,8 @@ const getAllPokemonData = async () => {
   try {
     const pokeApi = await getPokeInfo();
     const pokeDB = await getPokeDB();
-    return [...pokeApi,...pokeDB];
+    const allPoke = pokeApi.concat(pokeDB);
+    return allPoke;
   } catch (error) {
     console.log(error, "Error al concatenar los datos!");
   }
@@ -62,7 +70,7 @@ const getPokemonApiName = async (name) => {
       where: { name },
       include: { model: Types },
     });
-
+     
     if (pokeNameDb) {
       let pokeDataDb = {
         id: pokeNameDb.id,
@@ -74,10 +82,7 @@ const getPokemonApiName = async (name) => {
         speed: pokeNameDb.speed,
         height: pokeNameDb.height,
         weight: pokeNameDb.weight,
-        types:
-          pokeNameDb.types.lenght < 2
-            ? [pokeNameDb.types[0]]
-            : [pokeNameDb.types[0], pokeNameDb.types[1]],
+        types: pokeNameDb.Types.types?.map((e) => e.name),
       };
       return pokeDataDb;
     } else {
@@ -97,10 +102,13 @@ const getPokemonApiName = async (name) => {
 
 const getPokemonbyId = async (id) => {
   try {
-    if (id.lenght > 2) {
+    if (id.length > 2) {
       const searchPokeDb = await Pokemon.findOne({
         where: { id },
         include: Types,
+        through: {
+          attributes: [],
+        },
       });
       let pokeDbId = {
         id: searchPokeDb.id,
@@ -112,10 +120,7 @@ const getPokemonbyId = async (id) => {
         speed: searchPokeDb.speed,
         height: searchPokeDb.height,
         weight: searchPokeDb.weight,
-        types:
-        searchPokeDb.types.lenght < 2
-            ? [searchPokeDb.types[0]]
-            : [searchPokeDb.types[0], searchPokeDb.types[1]],
+        types: searchPokeDb.Types?.map((e) => e.name),
       };
       return pokeDbId;
     } else {
@@ -133,7 +138,6 @@ const getPokemonbyId = async (id) => {
 const postPokemon = async (pokeDataPost) => {
   try {
     const {
-      
       name,
       img,
       healthPoints,
@@ -142,7 +146,7 @@ const postPokemon = async (pokeDataPost) => {
       speed,
       height,
       weight,
-      types
+      types,
     } = pokeDataPost;
     const pokeCreate = await Pokemon.create({
       name,
@@ -153,22 +157,23 @@ const postPokemon = async (pokeDataPost) => {
       speed,
       height,
       weight,
+      types
     });
     const pokeCreateDb = await Types.findAll({
-      where: { name: types },
+      where: { name:types},
     });
-    let pokecreateType = await pokeCreate.addType(pokeCreateDb);
+    let pokecreateType = await pokeCreate.addTypes(pokeCreateDb);
     return pokecreateType;
   } catch (error) {
     console.log("No se ha podido crear tu Pokemon :/", error);
   }
 };
 
-module.exports={
-    getPokeInfo,
-    getPokeDB,
-    getPokemonApiName,
-    getPokemonbyId,
-    getAllPokemonData,
-    postPokemon
-}
+module.exports = {
+  getPokeInfo,
+  getPokeDB,
+  getPokemonApiName,
+  getPokemonbyId,
+  getAllPokemonData,
+  postPokemon,
+};
