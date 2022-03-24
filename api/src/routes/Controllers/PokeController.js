@@ -6,7 +6,7 @@ const getPokeInfo = async () => {
     const pokeDataUrl = await axios.get(
       "https://pokeapi.co/api/v2/pokemon?&limit=40"
     );
-    const ApiPokeSubReq =  pokeDataUrl.data.results.map((obj) =>
+    const ApiPokeSubReq = pokeDataUrl.data.results.map((obj) =>
       axios.get(obj.url)
     );
     const totalPokeInfo = await axios.all(ApiPokeSubReq);
@@ -17,7 +17,7 @@ const getPokeInfo = async () => {
     console.log(err, "Algo ha salido mal al traer los datos de la Api!");
   }
 };
-getPokeInfo()
+getPokeInfo();
 const pokeObj = (p) => {
   const pokeObj = {
     id: p.id,
@@ -30,10 +30,9 @@ const pokeObj = (p) => {
     height: p.height,
     weight: p.weight,
     types:
-    p.types.length < 2
-    ? [{ name: p.types[0].type.name }]
-    : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
-
+      p.types.length < 2
+        ? [{ name: p.types[0].type.name }]
+        : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
   };
   return pokeObj;
 };
@@ -43,7 +42,7 @@ const getPokeDB = async () => {
     return await Pokemon.findAll({
       include: {
         model: Types,
-        attributes: ['name'],
+        attributes: ["name"],
         through: {
           attributes: [],
         },
@@ -71,7 +70,7 @@ const getPokemonApiName = async (name) => {
       where: { name },
       include: { model: Types },
     });
-     
+
     if (pokeNameDb) {
       let pokeDataDb = {
         id: pokeNameDb.id,
@@ -83,7 +82,7 @@ const getPokemonApiName = async (name) => {
         speed: pokeNameDb.speed,
         height: pokeNameDb.height,
         weight: pokeNameDb.weight,
-        types: pokeNameDb.Types.types?.map((e) => e.name),
+        // types: pokeNameDb.Types.types?.map((e) => e.name),
       };
       return pokeDataDb;
     } else {
@@ -91,12 +90,10 @@ const getPokemonApiName = async (name) => {
         `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       );
       return pokeObj(pokemonbyName.data);
-      
     }
+    
   } catch (error) {
-    console.log(
-      error
-    );
+    console.log(error);
   }
 };
 
@@ -120,8 +117,12 @@ const getPokemonbyId = async (id) => {
         speed: searchPokeDb.speed,
         height: searchPokeDb.height,
         weight: searchPokeDb.weight,
-        types: searchPokeDb.Types?.map((e) => e.name),
+        types:
+          searchPokeDb.types.length < 2
+            ? [searchPokeIdDB.types[0]]
+            : [searchPokeIdDB.types[0], searchPokeIdDB.types[1]],
       };
+      console.log(pokeDbId);
       return pokeDbId;
     } else {
       const searchPokebyId = await axios.get(
@@ -157,10 +158,10 @@ const postPokemon = async (pokeDataPost) => {
       speed,
       height,
       weight,
-      types
+      types,
     });
     const pokeCreateDb = await Types.findAll({
-      where: { name:types},
+      where: { name: types },
     });
     let pokecreateType = await pokeCreate.addTypes(pokeCreateDb);
     return pokecreateType;

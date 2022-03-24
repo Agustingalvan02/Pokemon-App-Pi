@@ -125,14 +125,14 @@ console.log("Current Pokemons es: " + typeof currentPokemon)
         {currentPokemon?.map((p) => {
           return (
             <div>
-              {/* <Link to={'/Pokemons/'+p.id}> */}
+              <Link to={'/Pokemons/'+p.id}>
               <Cards
                 name={p.name}
                 img={p.img}
                 types={p.types.map((t) => t.name + " ")}
-                // id={p.id}
+                id={p.id}
               />
-              {/* </Link> */}
+              </Link>
             </div>
           );
         })}
