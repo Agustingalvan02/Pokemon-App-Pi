@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { searchByName} from "../../Actions/index";
+import { searchByName,getPokemons} from "../../Actions/index";
 import './searchBar.css'
 export default function SearchBar() {
     const dispatch=useDispatch()
@@ -13,7 +13,14 @@ export default function SearchBar() {
     }
     function handleSubmit(e){
         e.preventDefault()
-        dispatch(searchByName(name))
+        if (name!==null) {
+            dispatch(searchByName(name))
+        }
+        else{
+            alert("No hay resultados")
+            dispatch(getPokemons)
+
+        }
         
     }
     return(

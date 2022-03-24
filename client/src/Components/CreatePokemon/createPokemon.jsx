@@ -28,7 +28,7 @@ function formValidation(input) {
   if (input.weight < 0 || input.weight > 100) {
     formErrors.defense = "El peso debe ser entre 1 y 100";
   }
-  if (input.types.length < 2 || input.types.length > 2) {
+  if (input.types.length < 2) {
     formErrors.types = "Debes elegir al menos 2 Tipos!";
   }
   return formErrors;
@@ -55,6 +55,7 @@ export default function CreatePokemon() {
   }, [dispatch]);
 
   function handleChange(e) {
+    
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -65,6 +66,7 @@ export default function CreatePokemon() {
         [e.target.name]: e.target.value,
       })
     );
+    console.log(e)
   }
 
   function handleSelect(e) {
@@ -75,14 +77,14 @@ export default function CreatePokemon() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (Object.values(formErrors).length > 0||input.name==='') {
+    if (Object.values(formErrors).length > 0||input.name==="") {
       alert("Porfavor rellena los campos requeridos!");
     } else {
       dispatch(postPokemon(input));
       alert("Pokemon Creado!");
       setInput({
         name: "",
-        sprites: "",
+        sprites: " ",
         healthPoints: 0,
         attack: 0,
         defense: 0,
@@ -174,7 +176,7 @@ export default function CreatePokemon() {
           <input
             type="text"
             value={input.sprites}
-            name=" sprites"
+            name="sprites"
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -191,7 +193,7 @@ export default function CreatePokemon() {
           <ul>
             <li>{input.types.map((t) => t + ",")}</li>
           </ul>
-          {formErrors.types && <p>{formErrors.types}</p>}
+          
         </div>
        
              

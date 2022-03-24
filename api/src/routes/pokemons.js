@@ -12,12 +12,11 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const { name } = req.query;
+    const {name}  = req.query;
     if (name) {
       let pokename = await getPokemonApiName(name);
       pokename=[pokename]
-      console.log(pokename)
-      if (pokename) res.status(200).send(pokename);
+       res.status(200).send(pokename);
     } else {
       // const allPokemons= getAllPokemonData()
       res.status(200).send(await getAllPokemonData());

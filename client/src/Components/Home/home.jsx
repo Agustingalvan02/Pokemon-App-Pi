@@ -13,6 +13,7 @@ import Cards from "../Cards/cards";
 import Paginado from "../Paginado/paginado";
 import NavBar from "../NavBar/navBar";
 import SearchBar from "../SearchBar/searchBar";
+import './home.css'
 export default function Home() {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.pokemons);
@@ -61,7 +62,7 @@ console.log("Current Pokemons es: " + typeof currentPokemon)
   }
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       <div>
         <div>
           <select onChange={(e) => handleFilterByName(e)}>
@@ -120,18 +121,18 @@ console.log("Current Pokemons es: " + typeof currentPokemon)
       >
         Refresh
       </button>
-      <div>
+      <div className="CardContainer">
         {currentPokemon?.map((p) => {
           return (
             <div>
-              <Link to={'/Pokemons/'+p.id}>
+              {/* <Link to={'/Pokemons/'+p.id}> */}
               <Cards
                 name={p.name}
                 img={p.img}
                 types={p.types.map((t) => t.name + " ")}
-                id={p.id}
+                // id={p.id}
               />
-              </Link>
+              {/* </Link> */}
             </div>
           );
         })}

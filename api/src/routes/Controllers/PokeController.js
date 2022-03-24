@@ -6,7 +6,7 @@ const getPokeInfo = async () => {
     const pokeDataUrl = await axios.get(
       "https://pokeapi.co/api/v2/pokemon?&limit=40"
     );
-    const ApiPokeSubReq = await pokeDataUrl.data.results.map((obj) =>
+    const ApiPokeSubReq =  pokeDataUrl.data.results.map((obj) =>
       axios.get(obj.url)
     );
     const totalPokeInfo = await axios.all(ApiPokeSubReq);
@@ -17,7 +17,7 @@ const getPokeInfo = async () => {
     console.log(err, "Algo ha salido mal al traer los datos de la Api!");
   }
 };
-
+getPokeInfo()
 const pokeObj = (p) => {
   const pokeObj = {
     id: p.id,
@@ -30,9 +30,10 @@ const pokeObj = (p) => {
     height: p.height,
     weight: p.weight,
     types:
-      p.types.length < 2
-        ? [{ name: p.types[0].type.name }]
-        : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
+    p.types.length < 2
+    ? [{ name: p.types[0].type.name }]
+    : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
+
   };
   return pokeObj;
 };
@@ -89,12 +90,11 @@ const getPokemonApiName = async (name) => {
       const pokemonbyName = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       );
-      const responsePokebyname = pokeObj(pokemonbyName.data);
-      return responsePokebyname;
+      return pokeObj(pokemonbyName.data);
+      
     }
   } catch (error) {
     console.log(
-      "Algo salió mal al buscarlo en la busqueda por nombre :(",
       error
     );
   }
