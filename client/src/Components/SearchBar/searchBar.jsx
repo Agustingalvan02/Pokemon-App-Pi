@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch} from "react-redux";
-import { searchByName,getPokemons} from "../../Actions/index";
+import { searchByName} from "../../Actions/index";
 import './searchBar.css'
 export default function SearchBar() {
     const dispatch=useDispatch()
@@ -9,23 +9,23 @@ export default function SearchBar() {
     function handleInputChange(e){
       e.preventDefault()
       setName(e.target.value)
-      console.log(e)
+      
     }
     function handleSubmit(e){
         e.preventDefault()
-        if (name!==null) {
-            dispatch(searchByName(name))
-        }
-        else{
-            alert("No hay resultados")
-            dispatch(getPokemons)
+        dispatch(searchByName(name))
+        // if (name!==null) {
+        // }
+        // else{
+        //     alert("No hay resultados")
+        //     dispatch(getPokemons)
 
-        }
+        // }
         
     }
     return(
         <div>
-        <input onChange={(e)=>handleInputChange(e)} value={name}  type="text"  placeholder="Buscar.."/>
+        <input onChange={(e)=>handleInputChange(e)}  type="text"  placeholder="Buscar.."/>
         <button className="ButtonSearch"  onClick={(e)=>handleSubmit(e)}  type="submit">Buscar</button>
         </div>
     )

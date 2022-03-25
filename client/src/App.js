@@ -15,9 +15,7 @@ function App() {
     useEffect(() => {
         dispatch(getPokemons());
     }, [dispatch]);
-    useEffect(() => {
-      dispatch(getTypes());
-  }, [dispatch]);
+    
   
   return (
     <div className="App">

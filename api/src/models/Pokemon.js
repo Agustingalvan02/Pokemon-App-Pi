@@ -15,7 +15,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     img:{
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      
     },
     healthPoints:{
       type:DataTypes.INTEGER,
@@ -35,6 +36,7 @@ module.exports = (sequelize) => {
     },
     weight:{
       type:DataTypes.INTEGER
-    }
+    },
+   
   });
 };

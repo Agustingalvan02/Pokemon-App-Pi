@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  getTypes,
   getPokemons,
   filterByTypes,
   filterByName,
@@ -22,7 +23,7 @@ export default function Home() {
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
   const indexofLastPokemon = currentPage * pokemonsPerPage;
   const indexofFirstPokemon = indexofLastPokemon - pokemonsPerPage;
-  console.log("AllPokemons: ",typeof allPokemons)
+  
   const currentPokemon = allPokemons.slice(
     indexofFirstPokemon,
     indexofLastPokemon
@@ -32,7 +33,9 @@ export default function Home() {
     setCurrentPage(pageNumber);
   };
 
-console.log("Current Pokemons es: " + typeof currentPokemon)
+  useEffect(() => {
+    dispatch(getTypes());
+}, [dispatch]);
   function handleClick(e) {
     e.preventDefault();
     dispatch(getPokemons());
@@ -99,6 +102,7 @@ console.log("Current Pokemons es: " + typeof currentPokemon)
           <option value="default" hidden>
             -Existentes/Creados-
           </option>
+          <option value="Todos"> Todos </option>
           <option value="API"> API </option>
           <option value="Database"> Creados </option>
         </select>
@@ -129,7 +133,7 @@ console.log("Current Pokemons es: " + typeof currentPokemon)
               <Cards
                 name={p.name}
                 img={p.img}
-                types={p.types.map((t) => t.name + " ")}
+                types={p.types +" "}
                 id={p.id}
               />
               </Link>

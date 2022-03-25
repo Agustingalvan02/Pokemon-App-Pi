@@ -41,7 +41,7 @@ export default function CreatePokemon() {
   const [formErrors, setFormErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
-    sprites: "",
+    img: "",
     healthPoints: 0,
     attack: 0,
     defense: 0,
@@ -175,8 +175,8 @@ export default function CreatePokemon() {
           <label>Imagen:</label> <br />
           <input
             type="text"
-            value={input.sprites}
-            name="sprites"
+            value={input.img}
+            name="img"
             onChange={(e) => handleChange(e)}
           />
         </div>

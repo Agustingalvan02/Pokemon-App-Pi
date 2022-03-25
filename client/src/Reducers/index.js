@@ -34,7 +34,6 @@ export default function rootReducer(state = initialState, action) {
       // const pokemons = state.allPokemons;
       
       let pokemons = pokeCopy;
-       console.log("PokeDatos:",pokemons)
       const typePokemons =
         action.payload === "Todos"
            ? pokemons
@@ -47,7 +46,7 @@ export default function rootReducer(state = initialState, action) {
         //     }
 
         //   });
-          : pokemons.filter((e=>e.types.map((type)=>type.name)[0] === action.payload||e.types.map((type)=>type.name)[1] === action.payload))
+          : pokemons.filter((e=>e.types.map((type)=>type)[0] === action.payload||e.types.map((type)=>type)[1] === action.payload))
           //  :pokemons.types.map(p=>)
           
     
@@ -93,11 +92,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         pokemons: PokemonsFilteredByAttack,
       };
-    case "FILTER_BY_API_BD":
-      const PokemonsApiDB = action.payload === "API";
-      if (action.payload.includes("-")) {
-        state.pokemons.filter((e) => e.id === action.payload);
+    case "FILTER_BY_API_DB":
+      const PokemonsApiDB = 
+      action.payload === "Database"
+      if (state.pokemons.includes("-")) {
+        state.pokemons.filter((e) => e.id === action.payload)
       }
+      else{
+        state.pokemons.filter((e) => e.id === action.payload)
+      }
+      // if (action.payload.includes("-")) {
+      //   state.pokemons.filter((e) => e.id === action.payload);
+      // }
+      // else{
+        
+      // }
       return {
         ...state,
         pokemons: PokemonsApiDB,

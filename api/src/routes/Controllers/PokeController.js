@@ -1,5 +1,6 @@
 const { Pokemon, Types } = require("../../db");
 const axios = require("axios");
+const { map } = require("../../app");
 
 const getPokeInfo = async () => {
   try {
@@ -29,28 +30,83 @@ const pokeObj = (p) => {
     speed: p.stats[5].base_stat,
     height: p.height,
     weight: p.weight,
-    types:
-      p.types.length < 2
-        ? [{ name: p.types[0].type.name }]
-        : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
+    types: p.types?.map((e) => e.type.name),
+    // types:
+    //   p.types.length < 2
+    //     ? [{ name: p.types[0].type.name }]
+    //     : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
   };
   return pokeObj;
 };
 
 const getPokeDB = async () => {
-  try {
-    return await Pokemon.findAll({
-      include: {
-        model: Types,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  const dbPoke = await Pokemon.findAll({
+    attributes: [
+      "id",
+      "name",
+      "img",
+      "healthPoints",
+      "attack",
+      "defense",
+      "speed",
+      "height",
+      "weight",
+      
+    ],
+    include: {
+      model: Types,
+      attributes: ["name"],
+      through: {
+        attributes: [],
       },
-    });
-  } catch (error) {
-    console.log("Hay un error en la base de datos!", error);
-  }
+    },
+  });
+  let mapDb = dbPoke.map((e) => e.dataValues);
+  mapDb = mapDb.map((el) => {
+    let arrTemp = el.types.map((el) => el.name);
+    return {
+      id: el.id,
+      name: el.name,
+      img: el.img,
+      healthPoints: el.healthPoints,
+      attack: el.attack,
+      defense: el.defense,
+      speed: el.speed,
+      height: el.height,
+      weight: el.weight,
+      types: arrTemp,
+      
+    };
+  });
+  return mapDb;
+
+  // const dbPoke= await Pokemon?.findAll({
+  //   include: {
+  //     model: Types,
+  //     attributes: ["name"],
+  //     through: {
+  //       attributes: [],
+  //     },
+  //   },
+  // });
+  // return dbPoke
+  // console.log(dbPoke)
+  // const getAllDb= await dbPoke.dataValues?.map(e=>{
+  //   return{
+  //     id: e.id,
+  //     name: e.name,
+  //     img: e.sprites.other.dream_world.front_default,
+  //     healthPoints: e.healthPoints,
+  //     attack: e.stats[1].base_stat,
+  //     defense: e.stats[2].base_stat,
+  //     speed: e.stats[5].base_stat,
+  //     height: e.height,
+  //     weight: e.weight,
+  //     types: e.Types?.map((p) => p.name)
+  //   }
+
+  // })
+  // return getAllDb
 };
 
 const getAllPokemonData = async () => {
@@ -70,7 +126,6 @@ const getPokemonApiName = async (name) => {
       where: { name },
       include: { model: Types },
     });
-
     if (pokeNameDb) {
       let pokeDataDb = {
         id: pokeNameDb.id,
@@ -82,12 +137,13 @@ const getPokemonApiName = async (name) => {
         speed: pokeNameDb.speed,
         height: pokeNameDb.height,
         weight: pokeNameDb.weight,
-        // types: pokeNameDb.Types.types?.map((e) => e.name),
+       types: pokeNameDb.types?.map((e) => e.dataValues.name),
+       
       };
       return pokeDataDb;
     } else {
       const pokemonbyName = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().includes(name.toUpperCase())}`
       );
       return pokeObj(pokemonbyName.data);
     }
@@ -102,9 +158,13 @@ const getPokemonbyId = async (id) => {
     if (id.length > 2) {
       const searchPokeDb = await Pokemon.findOne({
         where: { id },
-        include: Types,
-        through: {
-          attributes: [],
+        include: {
+          model: Types,
+
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
       });
       let pokeDbId = {
@@ -117,10 +177,8 @@ const getPokemonbyId = async (id) => {
         speed: searchPokeDb.speed,
         height: searchPokeDb.height,
         weight: searchPokeDb.weight,
-        types:
-          searchPokeDb.types.length < 2
-            ? [searchPokeIdDB.types[0]]
-            : [searchPokeIdDB.types[0], searchPokeIdDB.types[1]],
+        types: searchPokeDb.types?.map((e) => e.dataValues.name),
+        
       };
       console.log(pokeDbId);
       return pokeDbId;

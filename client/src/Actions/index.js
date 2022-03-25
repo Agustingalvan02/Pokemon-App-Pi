@@ -22,7 +22,6 @@ export function getTypes() {
 }
 
 export function searchByName(name) {
-  console.log("Name del search ",name)
   return async function (dispatch) {
     try {
       var response = await axios.get(
