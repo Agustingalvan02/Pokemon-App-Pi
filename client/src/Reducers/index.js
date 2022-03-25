@@ -113,6 +113,11 @@ export default function rootReducer(state = initialState, action) {
       };
 
       case "POKEMON_DETAIL":
+        // if(action.payload.length){
+        //   var obj=action.payload[0]
+        // }else{
+        //    obj=action.payload
+        // }
           return{
             ...state,
             detail: action.payload
