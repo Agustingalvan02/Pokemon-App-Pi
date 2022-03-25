@@ -38,9 +38,9 @@ export function searchByName(name) {
 }
 
 export function PokemonDetail(id) {
+  console.log("Soy un id de mierda",id);
   return async function (dispatch) {
     let response = await axios.get("http://localhost:3001/pokemons/" + id);
-    console.log(response)
     return dispatch({
       type: "POKEMON_DETAIL",
       payload: response.data,

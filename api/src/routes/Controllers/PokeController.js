@@ -143,7 +143,7 @@ const getPokemonApiName = async (name) => {
       return pokeDataDb;
     } else {
       const pokemonbyName = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().includes(name.toUpperCase())}`
+        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       );
       return pokeObj(pokemonbyName.data);
     }
@@ -154,7 +154,7 @@ const getPokemonApiName = async (name) => {
 };
 
 const getPokemonbyId = async (id) => {
-  try {
+  
     if (id.length > 2) {
       const searchPokeDb = await Pokemon.findOne({
         where: { id },
@@ -180,7 +180,7 @@ const getPokemonbyId = async (id) => {
         types: searchPokeDb.types?.map((e) => e.dataValues.name),
         
       };
-      console.log(pokeDbId);
+
       return pokeDbId;
     } else {
       const searchPokebyId = await axios.get(
@@ -189,9 +189,6 @@ const getPokemonbyId = async (id) => {
       const resPokebyId = pokeObj(searchPokebyId.data);
       return resPokebyId;
     }
-  } catch (error) {
-    console.log("Fallo en la busqueda por Id :c", error);
-  }
 };
 
 const postPokemon = async (pokeDataPost) => {

@@ -27,13 +27,15 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  try {
+  
     const { id } = req.params;
     const pokeId = await getPokemonbyId(id);
     if (pokeId) return res.status(200).send(pokeId);
-  } catch {
-    res.status(404).send("../404/PsyduckPC404.jpg");
-  }
+     else{
+
+       res.status(404).send("../404/PsyduckPC404.jpg");
+     }
+  
 });
 
 router.post("/", async (req, res) => {

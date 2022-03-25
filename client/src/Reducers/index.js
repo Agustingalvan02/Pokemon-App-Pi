@@ -19,6 +19,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokeTypes: action.payload,
+        detail:[]
       };
     case "SEARCH_POKEMON_NAME":
       return {
@@ -113,14 +114,9 @@ export default function rootReducer(state = initialState, action) {
       };
 
       case "POKEMON_DETAIL":
-        // if(action.payload.length){
-        //   var obj=action.payload[0]
-        // }else{
-        //    obj=action.payload
-        // }
           return{
             ...state,
-            detail: action.payload
+            detail:[action.payload]
           }
     default:
       return state;
