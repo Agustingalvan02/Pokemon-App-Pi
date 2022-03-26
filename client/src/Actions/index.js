@@ -77,10 +77,10 @@ export function filterByName(payload) {
   };
 }
 
-export function filterByApiOrDb(id) {
+export function filterByApiOrDb(payload) {
   return {
     type: "FILTER_BY_API_DB",
-    payload:id,
+    payload,
   };
 }
 

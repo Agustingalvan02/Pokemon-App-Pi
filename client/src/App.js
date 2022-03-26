@@ -8,7 +8,7 @@ import landingPage from './Components/LandingPage/landingPage';
 import CreatePokemon from './Components/CreatePokemon/createPokemon';
 import CardDetail from './Components/CardDetail/cardDetail';
 // import NavBar from './Components/NavBar/navBar';
-import PokeLogo from './image/PokemonLogo.png';
+// import PokeLogo from './image/PokemonLogo.png';
 function App() {
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ function App() {
   
   return (
     <div className="App">
-      <img src={PokeLogo} alt='Pokelogo' height={100}></img>
+      {/* <img className='logoPoke' src={PokeLogo} alt='Pokelogo' height={100}></img> */}
       {/* <NavBar/> */}
       <Switch>
       <Route exact path="/" component={landingPage}/>

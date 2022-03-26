@@ -7,4 +7,23 @@
   background-color: white;
   box-shadow: 3px 0px 10px 4px #050505;
   text-align: center;
+  background-image: url("../../image/pokeballCard.jpg");
+  
+}
+
+img{
+  border-radius: 20px;
+}
+.colorCard{
+  color: red;
+}
+.h1Card{
+  font-family: 'Roboto Mono', monospace;
+  color: black;
+  margin-top: 70px;
+}
+
+.h3Card{
+  font-family: 'Roboto Mono', monospace;
+  color: black;
 }

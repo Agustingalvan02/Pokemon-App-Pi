@@ -25,7 +25,6 @@ export default function CardDetail(props) {
           Volver!
         </button>
       </Link>
-      Soy el card Detail!
       <div>
         {pokeDetail.length > 0 ? (
           <main>
@@ -33,7 +32,8 @@ export default function CardDetail(props) {
               <img src={pokeDetail[0].img} alt="no pokeimage" />
               <h1>Nombre:{pokeDetail[0].name}</h1>
               <h2>Ataque:{pokeDetail[0].attack}</h2>
-              <h2>Tipos:{pokeDetail[0].types}</h2>
+              <h2>Defensa:{pokeDetail[0].defense}</h2>
+              <h2>Tipos:{pokeDetail[0].types + " "}</h2>
               <h2>Velocidad:{pokeDetail[0].speed}</h2>
               <h2>Altura:{pokeDetail[0].height}</h2>
               <h2>Peso:{pokeDetail[0].weight}</h2>

@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     },
     img:{
       type:DataTypes.STRING,
-      
+      defaultValue:"https://w7.pngwing.com/pngs/394/914/png-transparent-pokemon-go-pokemon-diamond-and-pearl-poke-ball-pokemon-go-game-video-game-pokemon.png"
     },
     healthPoints:{
       type:DataTypes.INTEGER,
@@ -37,6 +37,9 @@ module.exports = (sequelize) => {
     weight:{
       type:DataTypes.INTEGER
     },
-   
+    createInDb:{
+      type: DataTypes.BOOLEAN,
+      defaultValue:true,
+    }
   });
 };

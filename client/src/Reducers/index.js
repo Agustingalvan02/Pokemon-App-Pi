@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, action) {
-  const pokeCopy= state.allPokemons
+  const pokeCopy = state.allPokemons;
   switch (action.type) {
     case "GET_POKEMONS":
       return {
@@ -19,7 +19,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokeTypes: action.payload,
-        detail:[]
+        detail: [],
       };
     case "SEARCH_POKEMON_NAME":
       return {
@@ -33,25 +33,27 @@ export default function rootReducer(state = initialState, action) {
       };
     case "FILTER_BY_TYPES":
       // const pokemons = state.allPokemons;
-      
+
       let pokemons = pokeCopy;
       const typePokemons =
         action.payload === "Todos"
-           ? pokemons
-        //    :  pokemons.filter(function(t){
-        //     if (t.types.name){
-        //       if(t.types[0].name.includes(action.payload))
-        //       {
-        //         return t
-        //       }
-        //     }
+          ? pokemons
+          : //    :  pokemons.filter(function(t){
+            //     if (t.types.name){
+            //       if(t.types[0].name.includes(action.payload))
+            //       {
+            //         return t
+            //       }
+            //     }
 
-        //   });
-          : pokemons.filter((e=>e.types.map((type)=>type)[0] === action.payload||e.types.map((type)=>type)[1] === action.payload))
-          //  :pokemons.types.map(p=>)
-          
-    
-            
+            //   });
+            pokemons.filter(
+              (e) =>
+                e.types.map((type) => type)[0] === action.payload ||
+                e.types.map((type) => type)[1] === action.payload
+            );
+      //  :pokemons.types.map(p=>)
+
       return {
         ...state,
         pokemons: typePokemons,
@@ -78,11 +80,11 @@ export default function rootReducer(state = initialState, action) {
     case "FILTER_BY_ATTACK":
       const PokemonsFilteredByAttack =
         action.payload === "ascendente"
-        ? state.pokemons.sort((h, l) => {
-            if (h.attack > l.attack) return -1;
-            if (l.attack > h.attack) return 1;
-            return 0;
-          })
+          ? state.pokemons.sort((h, l) => {
+              if (h.attack > l.attack) return -1;
+              if (l.attack > h.attack) return 1;
+              return 0;
+            })
           : state.pokemons.sort((h, l) => {
               if (h.attack > l.attack) return 1;
               if (l.attack > h.attack) return -1;
@@ -94,33 +96,12 @@ export default function rootReducer(state = initialState, action) {
         pokemons: PokemonsFilteredByAttack,
       };
     case "FILTER_BY_API_DB":
-      const PokemonsApiDB = 
-      action.payload === "Database"
-      if (state.pokemons.includes("-")) {
-        state.pokemons.filter((e) => e.id === action.payload)
-      }
-      else{
-        state.pokemons.filter((e) => e.id === action.payload)
-      }
-      // if (action.payload.includes("-")) {
-      //   state.pokemons.filter((e) => e.id === action.payload);
-      // }
-      // else{
-        
-      // }
+      const filtrado = action.payload === 'Database'? state.allPokemons.filter(el => typeof el.id !== 'number') : state.allPokemons.filter(el=> typeof el.id === 'number') ;
       return {
-        ...state,
-        pokemons: PokemonsApiDB,
-      };
-
-      case "POKEMON_DETAIL":
-          return{
-            ...state,
-            detail:[action.payload]
-          }
+          ...state,
+          pokemons: action.payload === 'Todos'? state.allPokemons : filtrado
+      }
     default:
       return state;
   }
-
-  
 }

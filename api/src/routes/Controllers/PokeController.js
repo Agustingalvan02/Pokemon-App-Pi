@@ -1,6 +1,6 @@
 const { Pokemon, Types } = require("../../db");
 const axios = require("axios");
-const { map } = require("../../app");
+
 
 const getPokeInfo = async () => {
   try {
@@ -51,7 +51,7 @@ const getPokeDB = async () => {
       "speed",
       "height",
       "weight",
-      
+      "createInDb"
     ],
     include: {
       model: Types,
@@ -75,7 +75,7 @@ const getPokeDB = async () => {
       height: el.height,
       weight: el.weight,
       types: arrTemp,
-      
+      createIndb:el.createInDb
     };
   });
   return mapDb;

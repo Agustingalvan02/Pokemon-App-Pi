@@ -68,7 +68,12 @@ export default function CreatePokemon() {
     );
     console.log(e)
   }
-
+  function handleDelete(e) {
+    setInput({
+      ...input,
+      types: input.types.filter(type=>type !== e)
+  })
+}
   function handleSelect(e) {
     setInput({
       ...input,
@@ -105,7 +110,7 @@ export default function CreatePokemon() {
           <label>Nombre:</label> <br />
           <input
             type="text"
-            value={input.name}
+            value={input.name.toLowerCase()}
             name="name"
             onChange={(e) => handleChange(e)}
           />
@@ -190,10 +195,17 @@ export default function CreatePokemon() {
                 </option>
               ))}
           </select>
-          <ul>
-            <li>{input.types.map((t) => t + ",")}</li>
-          </ul>
-          
+          <div className="div">
+                  {input.types.map((el) => {
+                    return (
+                        <div className="div_types" key={el}>
+                            <h4 className="h4">{el}</h4>
+                            <button className="x_button" onClick={() => {handleDelete(el)}}>x</button>
+                        </div>
+                    );
+                  })}
+                </div>
+                
         </div>
        
              

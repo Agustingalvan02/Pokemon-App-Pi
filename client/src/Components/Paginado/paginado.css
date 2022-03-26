@@ -1,0 +1,16 @@
+.paginado{
+    display: inline-flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0%;
+}
+.pagButton{
+ background-color: red;
+ /* border-radius: 100px; */
+  color: white;
+  padding: 15px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

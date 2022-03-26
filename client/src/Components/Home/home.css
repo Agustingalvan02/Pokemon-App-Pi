@@ -5,3 +5,33 @@
     flex-wrap: wrap;
 
 }
+.container{
+  background-image: url("../../image/PokeHome.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.filtros{
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.imgHome{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: center;
+    z-index: -1;
+    display: block;
+    position: center;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.LinkCard {
+    text-decoration: none;
+  }
+
+  .Cards{
+    font-family: 'Roboto', sans-serif;
+  }
