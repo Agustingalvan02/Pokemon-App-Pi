@@ -31,6 +31,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         newPokemon: action.payload,
       };
+
+      case "POKEMON_DETAIL":
+          return{
+            ...state,
+            detail:[action.payload]
+          }
     case "FILTER_BY_TYPES":
       // const pokemons = state.allPokemons;
 

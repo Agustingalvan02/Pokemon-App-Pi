@@ -28,8 +28,8 @@ function formValidation(input) {
   if (input.weight < 0 || input.weight > 100) {
     formErrors.defense = "El peso debe ser entre 1 y 100";
   }
-  if (input.types.length < 2) {
-    formErrors.types = "Debes elegir al menos 2 Tipos!";
+  if (input.types.length > 2) {
+    formErrors.types = "Debes elegir 2 Tipos!";
   }
   return formErrors;
 }
