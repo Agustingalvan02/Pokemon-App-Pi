@@ -28,8 +28,8 @@ function formValidation(input) {
   if (input.weight < 0 || input.weight > 100) {
     formErrors.defense = "El peso debe ser entre 1 y 100";
   }
-  if (input.types.length > 2) {
-    formErrors.types = "Debes elegir 2 Tipos!";
+  if (input.types.length === 0) {
+    formErrors.types = "Solo debes elegir 2 tipos!";
   }
   return formErrors;
 }
@@ -75,10 +75,17 @@ export default function CreatePokemon() {
   })
 }
   function handleSelect(e) {
-    setInput({
-      ...input,
-       types: [...input.types, e.target.value],
-    });
+    if (input.types.length<2) {
+      setInput({
+        ...input,
+         types: [...input.types, e.target.value],
+  
+      });
+      
+    }
+    else{
+      alert("Solo debes poner 2 tipos!")
+    }
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -179,7 +186,7 @@ export default function CreatePokemon() {
         <div className="divForm">
           <label>Imagen:</label> <br />
           <input
-            type="text"
+            type="url"
             value={input.img}
             name="img"
             onChange={(e) => handleChange(e)}

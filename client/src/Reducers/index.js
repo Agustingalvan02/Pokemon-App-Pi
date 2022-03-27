@@ -22,9 +22,11 @@ export default function rootReducer(state = initialState, action) {
         detail: [],
       };
     case "SEARCH_POKEMON_NAME":
+
       return {
         ...state,
         pokemons: action.payload,
+        
       };
     case "POST_POKEMON":
       return {
@@ -44,21 +46,13 @@ export default function rootReducer(state = initialState, action) {
       const typePokemons =
         action.payload === "Todos"
           ? pokemons
-          : //    :  pokemons.filter(function(t){
-            //     if (t.types.name){
-            //       if(t.types[0].name.includes(action.payload))
-            //       {
-            //         return t
-            //       }
-            //     }
-
-            //   });
+          :
             pokemons.filter(
               (e) =>
                 e.types.map((type) => type)[0] === action.payload ||
                 e.types.map((type) => type)[1] === action.payload
             );
-      //  :pokemons.types.map(p=>)
+      
 
       return {
         ...state,

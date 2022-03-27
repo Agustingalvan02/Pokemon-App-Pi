@@ -23,7 +23,6 @@ export function getTypes() {
 
 export function searchByName(name) {
   return async function (dispatch) {
-    try {
       var response = await axios.get(
         `http://localhost:3001/pokemons?name=${name}`
       );
@@ -31,14 +30,12 @@ export function searchByName(name) {
         type: "SEARCH_POKEMON_NAME",
         payload: response.data,
       });
-    } catch (error) {
-      console.log(error + "Pokemon no encontrado!");
+    
     }
   };
-}
+
 
 export function PokemonDetail(id) {
-  console.log("Soy un id de mierda",id);
   return async function (dispatch) {
     let response = await axios.get("http://localhost:3001/pokemons/" + id);
     return dispatch({
@@ -54,7 +51,6 @@ export function postPokemon(payload) {
       "http://localhost:3001/pokemons/",
       payload
     );
-    console.log(response);
     return dispatch({
       type: "POST_POKEMON",
       payload: response.data,
@@ -63,7 +59,6 @@ export function postPokemon(payload) {
 }
 
 export function filterByTypes(payload) {
-  console.log(payload)
   return {
     type: "FILTER_BY_TYPES",
     payload,

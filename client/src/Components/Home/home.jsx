@@ -29,6 +29,8 @@ export default function Home() {
     indexofFirstPokemon,
     indexofLastPokemon
   );
+
+  console.log("Que tiene current Pages: ", currentPage)
   const [renderPage, setRenderPage] = useState(" ");
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -61,94 +63,121 @@ export default function Home() {
   }
 
   function handleFilterByApiOrDb(e) {
-     e.preventDefault();
+    e.preventDefault();
     dispatch(filterByApiOrDb(e.target.value));
     setRenderPage(e.target.value);
   }
-  return (
-    <div className="container">
+
   
-      <NavBar />
+   
+    return (
       <div>
-        <div className="filtros">
-          <select onChange={(e) => handleFilterByName(e)}>
-            <option value="default" hidden>
-              -Selección Alfabética-
-            </option>
-            <option value="A-Z"> A-Z </option>
-            <option value="Z-A"> Z-A </option>
-          </select>
+        {allPokemons&&allPokemons[0]!==null? 
+      <div className="container">
+
+        <NavBar />
+        <div>
+          <div className="filtros">
+            <select onChange={(e) => handleFilterByName(e)}>
+              <option value="default" hidden>
+                -Selección Alfabética-
+              </option>
+              <option value="A-Z"> A-Z </option>
+              <option value="Z-A"> Z-A </option>
+            </select>
+          </div>
+          <div className="filtros">
+            <select onChange={(e) => handleFilterByTypes(e)}>
+              <option value="default" hidden>
+                -Selección De Tipos-
+              </option>
+              <option value="Todos">Todos </option>
+              {types &&
+                types?.map((poketypes) => (
+                  <option value={poketypes} key={poketypes}>
+                    {poketypes}
+                  </option>
+                ))}
+            </select>
+          </div>
         </div>
-        <div className="filtros">
-          <select onChange={(e) => handleFilterByTypes(e)}>
-            <option value="default" hidden>
-              -Selección De Tipos-
-            </option>
-            <option value="Todos">Todos </option>
-            {types &&
-              types?.map((poketypes) => (
-                <option value={poketypes} key={poketypes}>
-                  {poketypes}
-                </option>
-              ))}
-          </select>
+        <div className="filterContainer">
+          <div className="filtros">
+            <select onChange={(e) => handleFilterByAttack(e)}>
+              <option value="default" hidden>
+                -Mayor/Menor Ataque-
+              </option>
+              <option value="ascendente"> Mayor Ataque </option>
+              <option value="descendente"> Menor Ataque </option>
+            </select>
+          </div>
+          <div className="filtros">
+            <select onChange={(e) => handleFilterByApiOrDb(e)}>
+              <option value="default" hidden>
+                -Existentes/Creados-
+              </option>
+              <option value="Todos"> Todos </option>
+              <option value="API"> API </option>
+              <option value="Database"> Creados </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <SearchBar />
+        </div>
+        <div>
+          <Paginado
+            className="paginado"
+            pokemonsPerPage={pokemonsPerPage}
+            allPokemons={allPokemons?.length}
+            paginado={paginado}
+          />
+        </div>
+        <button
+          className="refreshButton"
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Refresh
+        </button>
+        <div className="CardContainer">
+          {currentPokemon?.map((p) => {
+            return (
+              <div>
+                <Link className="LinkCard" to={"/Pokemons/" + p.id}>
+                  <Cards
+                    className="Cards"
+                    name={p.name}
+                    img={p.img}
+                    types={p.types + " "}
+                    id={p.id}
+                  />
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
-      <div className="filterContainer">
-        <div className="filtros">
-          <select onChange={(e) => handleFilterByAttack(e)}>
-            <option value="default" hidden>
-              -Mayor/Menor Ataque-
-            </option>
-            <option value="ascendente"> Mayor Ataque </option>
-            <option value="descendente"> Menor Ataque </option>
-          </select>
-        </div>
-        <div className="filtros">
-          <select onChange={(e) => handleFilterByApiOrDb(e)}>
-            <option value="default" hidden>
-              -Existentes/Creados-
-            </option>
-            <option value="Todos"> Todos </option>
-            <option value="API"> API </option>
-            <option value="Database"> Creados </option>
-          </select>
-        </div>
+
+      :(<div>
+        <h1>No hay nada </h1>
+        <button
+          className="refreshButton"
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        > Volver al Home</button>
       </div>
-      <div>
-        <SearchBar />
+      
+      
+      
+      )
+      
+    }
       </div>
-      <div>
-        <Paginado className="paginado"
-          pokemonsPerPage={pokemonsPerPage}
-          allPokemons={allPokemons?.length}
-          paginado={paginado}
-        />
-      </div>
-      <button
-        className="refreshButton"
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Refresh
-      </button>
-      <div className="CardContainer">
-        {currentPokemon?.map((p) => {
-          return (
-            <div>
-              <Link className="LinkCard" to={"/Pokemons/" + p.id}>
-                <Cards className="Cards"
-                  name={p.name}
-                  img={p.img}
-                  types={p.types + " "}
-                  id={p.id}
-                />
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+
+    );
+  
+   
 }

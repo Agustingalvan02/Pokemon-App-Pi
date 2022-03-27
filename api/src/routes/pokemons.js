@@ -11,19 +11,18 @@ const {
 const router = Router();
 
 router.get("/", async (req, res) => {
-  try {
+  
     const {name}  = req.query;
     if (name) {
       let pokename = await getPokemonApiName(name);
-      pokename=[pokename]
-       res.status(200).send(pokename);
+       pokename=[pokename]
+       pokename.length
+        ?res.status(200).send(pokename)
+       :res.send({error: 'Pokemon not found'});
     } else {
-      // const allPokemons= getAllPokemonData()
       res.status(200).send(await getAllPokemonData());
     }
-  } catch {
-    res.status(404).send("../404/PsyduckPC404.jpg");
-  }
+ 
 });
 
 router.get("/:id", async (req, res) => {

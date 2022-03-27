@@ -1,0 +1,35 @@
+.containerDetail {
+  /* background-image: url("../../image/PokeDexWallpaper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
+}
+.pokeDex {
+  margin-bottom: -876px;
+}
+
+.imgPoke {
+  height: 330px;
+  margin-top:179px;
+  z-index: -1;
+}
+.idP{
+  margin-top:-11px; 
+}
+.data1 {
+  display: flex;
+  justify-content: center;
+  gap: 104px;
+  margin-top: 31px;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+}
+
+.data2 {
+  display: inline-block;
+  margin-left: 56px;
+  margin-right: 43px;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  margin-top: -12px
+}
