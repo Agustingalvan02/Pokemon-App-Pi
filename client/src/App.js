@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Switch} from 'react-router-dom';
 import {useEffect } from "react";
 import { useDispatch} from "react-redux";
-import { getPokemons,PokemonDetail} from './Actions';
+import { getPokemons} from './Actions';
 import Home from './Components/Home/home';
 import landingPage from './Components/LandingPage/landingPage';
 import CreatePokemon from './Components/CreatePokemon/createPokemon';
