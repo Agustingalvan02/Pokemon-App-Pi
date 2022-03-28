@@ -5,20 +5,13 @@ import { Link } from "react-router-dom";
 import "./cardDetail.css"
 import PokeDexW from "../../image/PokeDexWallpaper.jpg"
 export default function CardDetail(props) {
-  console.log("Hola soy un prop!:", props);
   const dispatch = useDispatch();
   let pokeDetail = useSelector((state) => state.detail);
-  // let pokeArray=[];
-  // pokeArray.push(pokeDetail)
-  console.log("Pokedetail es un array? ",Array.isArray(pokeDetail))
   useEffect(() => {
     dispatch(PokemonDetail(props.match.params.id));
   }, [dispatch, props.match.params.id]);
 
-  // function handleClick(e) {
-  //   e.preventDefault();
-  //   dispatch(PokemonDetail());
-  // }
+  
 
   return (
     <div>

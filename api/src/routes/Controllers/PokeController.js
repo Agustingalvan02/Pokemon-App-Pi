@@ -31,10 +31,7 @@ const pokeObj = (p) => {
     height: p.height,
     weight: p.weight,
     types: p.types?.map((e) => e.type.name),
-    // types:
-    //   p.types.length < 2
-    //     ? [{ name: p.types[0].type.name }]
-    //     : [{ name: p.types[0].type.name }, { name: p.types[1].type.name }],
+    
   };
   return pokeObj;
 };

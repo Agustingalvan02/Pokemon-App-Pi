@@ -14,13 +14,6 @@ export default function SearchBar() {
     function handleSubmit(e){
         e.preventDefault()
         dispatch(searchByName(name))
-        // if (name!==null) {
-        // }
-        // else{
-        //     alert("No hay resultados")
-        //     dispatch(getPokemons)
-
-        // }
         
     }
     return(

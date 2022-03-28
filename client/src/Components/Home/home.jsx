@@ -46,7 +46,6 @@ export default function Home() {
   }
   function handleFilterByAttack(e) {
     e.preventDefault();
-    console.log(e.target.value);
     dispatch(filterByAttack(e.target.value));
     setRenderPage(e.target.value);
   }
@@ -59,7 +58,6 @@ export default function Home() {
     e.preventDefault();
     dispatch(filterByTypes(e.target.value));
     setRenderPage(e.target.value);
-    console.log("FilterTypes: ", e.target.value);
   }
 
   function handleFilterByApiOrDb(e) {

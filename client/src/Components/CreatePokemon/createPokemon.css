@@ -1,7 +1,35 @@
-.divForm{
-    display: block;
+.formDiv {
+  right: 0;
+  margin: 20px;
+  max-width: 430px;
+  padding: 16px;
+  color:white;
+  background-color:black;
+  box-shadow: 3px 0px 10px 4px #050505;
+  border-radius: 10px;
+  margin-left:403px;
+ font-family: 'Roboto', sans-serif;
+ margin-top: -3px;
+  
+}
+.imgBackground {
+  z-index: -1;
 }
 
-.formStyle{
-    display: block;
+.formStyle {
+  display: block;
+  right: 0;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  color: white;
+  box-shadow: 3px 0px 10px 4px #050505;
+}
+
+.landscape {
+  background-image: url("../../image/BackGroundFond.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 900px;
 }
