@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
   
     const {name}  = req.query;
     if (name) {
-      let pokename = await getPokemonApiName(name);
+      let pokename = await getPokemonApiName(name.toLowercase());
        pokename=[pokename]
        pokename.length
-        ?res.status(200).send(pokename)
+        ?res.status(200).send(pokename.toLowercase())
        :res.send({error: 'Pokemon not found'});
     } else {
       res.status(200).send(await getAllPokemonData());
