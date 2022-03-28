@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   
     const {name}  = req.query;
     if (name) {
-      let pokename = await getPokemonApiName(name.toLowercase());
+      let pokename = await getPokemonApiName();
        pokename=[pokename]
        pokename.length
         ?res.status(200).send(pokename.toLowercase())
