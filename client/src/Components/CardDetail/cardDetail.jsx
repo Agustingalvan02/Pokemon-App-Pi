@@ -14,7 +14,7 @@ export default function CardDetail(props) {
   
 
   return (
-    <div>
+    <div className="backgroundCard">
       <div >
         <img className="pokeDex" src={PokeDexW} alt="no data" />
         {pokeDetail.length > 0 ? (
