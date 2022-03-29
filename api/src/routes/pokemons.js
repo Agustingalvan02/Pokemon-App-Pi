@@ -26,13 +26,14 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  
-    const { id } = req.params;
-    const pokeId = await getPokemonbyId(id);
-    if (pokeId) return res.status(200).send(pokeId);
+  const { id } = req.params;
+  const pokeId = await getPokemonbyId(id);
+    if (pokeId){
+      if(pokeId.id<=40)
+      return res.status(200).send(pokeId);
+    }
      else{
-
-       res.status(404).send("../404/PsyduckPC404.jpg");
+       res.send("../404/PsyduckPC404.jpg");
      }
   
 });

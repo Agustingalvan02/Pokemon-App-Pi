@@ -36,6 +36,7 @@ export function searchByName(name) {
 
 
 export function PokemonDetail(id) {
+  
   return async function (dispatch) {
     let response = await axios.get("/pokemons/" + id);
     return dispatch({
@@ -43,7 +44,8 @@ export function PokemonDetail(id) {
       payload: response.data,
     });
   };
-}
+  }
+
 
 export function postPokemon(payload) {
   return async function (dispatch) {

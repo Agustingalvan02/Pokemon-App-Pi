@@ -2,6 +2,7 @@ const { Pokemon, Types } = require("../../db");
 const axios = require("axios");
 
 
+
 const getPokeInfo = async () => {
   try {
     const pokeDataUrl = await axios.get(
@@ -126,8 +127,7 @@ const getPokemonApiName = async (name) => {
 };
 
 const getPokemonbyId = async (id) => {
-  
-    if (id.length > 2) {
+    if (id.length > 4) {
       const searchPokeDb = await Pokemon.findOne({
         where: { id },
         include: {
@@ -154,7 +154,7 @@ const getPokemonbyId = async (id) => {
       };
 
       return pokeDbId;
-    } else {
+    } else if(id.length<=40){
       const searchPokebyId = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id}`
       );
