@@ -118,8 +118,7 @@ export default function CreatePokemon() {
           <div className="divForm">
             <label>Nombre:</label> <br />
             <input
-             className="inputForm"
-             required
+              className="inputForm"
               type="text"
               value={input.name}
               name="name"
@@ -130,8 +129,7 @@ export default function CreatePokemon() {
           <div className="divForm">
             <label>Puntos de Salud:</label> <br />
             <input
-            className="inputForm"
-             required
+              className="inputForm"
               type="number"
               value={input.healthPoints}
               name="healthPoints"
@@ -143,7 +141,6 @@ export default function CreatePokemon() {
             <label>Puntos de Ataque:</label> <br />
             <input
               className="inputForm"
-              required
               type="number"
               value={input.attack}
               name="attack"
@@ -155,7 +152,6 @@ export default function CreatePokemon() {
             <label>Puntos de Defensa:</label> <br />
             <input
               className="inputForm"
-              required
               type="number"
               value={input.defense}
               name="defense"
@@ -167,7 +163,6 @@ export default function CreatePokemon() {
             <label>Velocidad:</label> <br />
             <input
               className="inputForm"
-              required
               type="number"
               value={input.speed}
               name="speed"
@@ -179,7 +174,6 @@ export default function CreatePokemon() {
             <label> Altura:</label> <br />
             <input
               className="inputForm"
-              required
               type="number"
               value={input.height}
               name="height"
@@ -191,7 +185,6 @@ export default function CreatePokemon() {
             <label> Peso:</label> <br />
             <input
               className="inputForm"
-              required
               type="number"
               value={input.weight}
               name="weight"
@@ -203,7 +196,6 @@ export default function CreatePokemon() {
             <label>Imagen:</label> <br />
             <input
               className="inputForm"
-              required
               type="url"
               value={input.img}
               name="img"
@@ -240,14 +232,14 @@ export default function CreatePokemon() {
             </div>
             <br />
           </div>
-           
-          <button className="buttonCreate" type="submit">Crear Pokémon!</button>
+
+          <button className="buttonCreate" type="submit">
+            Crear Pokémon!
+          </button>
           {/* <button disabled type="submit">Rellena los campos!</button> */}
           <Link to={"/home"}>
-        <button className="buttonVolverForm">
-          Volver!
-        </button>
-      </Link>
+            <button className="buttonVolverForm">Volver!</button>
+          </Link>
         </form>
       </div>
     </div>
