@@ -13,7 +13,7 @@ export default function SearchBar() {
     }
     function handleSubmit(e){
         e.preventDefault()
-        dispatch(searchByName(name))
+        dispatch(searchByName(name.toLowerCase()))
         
     }
     return(

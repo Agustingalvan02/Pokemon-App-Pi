@@ -62,13 +62,13 @@ export default function rootReducer(state = initialState, action) {
       const PokemonFilteredByName =
         action.payload === "A-Z"
           ? state.pokemons.sort((a, z) => {
-              if (a.name > z.name) return 1;
-              if (z.name > a.name) return -1;
+              if (a.name.toLowerCase() > z.name.toLowerCase()) return 1;
+              if (z.name.toLowerCase() > a.name.toLowerCase()) return -1;
               return 0;
             })
           : state.pokemons.sort((a, z) => {
-              if (a.name > z.name) return -1;
-              if (z.name > a.name) return 1;
+              if (a.name.toLowerCase() > z.name.toLowerCase()) return -1;
+              if (z.name.toLowerCase() > a.name.toLowerCase()) return 1;
               return 0;
             });
 

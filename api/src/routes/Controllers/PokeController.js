@@ -23,7 +23,7 @@ getPokeInfo();
 const pokeObj = (p) => {
   const pokeObj = {
     id: p.id,
-    name: p.name,
+    name: p.name.toLowerCase(),
     img: p.sprites.other.dream_world.front_default,
     healthPoints: p.healthPoints,
     attack: p.stats[1].base_stat,
@@ -101,7 +101,7 @@ const getPokemonApiName = async (name) => {
     if (pokeNameDb) {
       let pokeDataDb = {
         id: pokeNameDb.id,
-        name: pokeNameDb.name,
+        name: pokeNameDb.name.toLowerCase(),
         img: pokeNameDb.img,
         healthPoints: pokeNameDb.healthPoints,
         attack: pokeNameDb.attack,
@@ -141,7 +141,7 @@ const getPokemonbyId = async (id) => {
       });
       let pokeDbId = {
         id: searchPokeDb.id,
-        name: searchPokeDb.name,
+        name: searchPokeDb.name.toLowerCase(),
         img: searchPokeDb.img,
         healthPoints: searchPokeDb.healthPoints,
         attack: searchPokeDb.attack,

@@ -33,6 +33,9 @@ function formValidation(input) {
   if (input.types.length === 0) {
     formErrors.types = "Solo debes elegir 2 tipos!";
   }
+  if (!input.img) {
+    formErrors.name = "Se requiere una imagen!";
+  }
   return formErrors;
 }
 
@@ -116,7 +119,7 @@ export default function CreatePokemon() {
             <label>Nombre:</label> <br />
             <input
               type="text"
-              value={input.name.toLowerCase()}
+              value={input.name}
               name="name"
               onChange={(e) => handleChange(e)}
             />
@@ -190,6 +193,7 @@ export default function CreatePokemon() {
               name="img"
               onChange={(e) => handleChange(e)}
             />
+            {formErrors.img && <p>{formErrors.img}</p>}
           </div>
           <div className="divForm">
             <select onChange={(e) => handleSelect(e)}>
