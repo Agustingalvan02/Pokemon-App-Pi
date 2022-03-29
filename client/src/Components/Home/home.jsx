@@ -16,6 +16,7 @@ import Paginado from "../Paginado/paginado";
 import NavBar from "../NavBar/navBar";
 import SearchBar from "../SearchBar/searchBar";
 import "./home.css";
+import pokenotfound from "../../image/PsyduckPC404.jpg"
 // import PokeHome from "../../image/PokeHome.jpg"
 export default function Home() {
   const dispatch = useDispatch();
@@ -158,13 +159,14 @@ export default function Home() {
       </div>
 
       :(<div>
-        <h1>No hay nada </h1>
+        {/* <h1>No hay nada </h1> */}
         <button
           className="refreshButton"
           onClick={(e) => {
             handleClick(e);
           }}
         > Volver al Home</button>
+          <img src={pokenotfound} alt="Psyduck" />
       </div>
       
       

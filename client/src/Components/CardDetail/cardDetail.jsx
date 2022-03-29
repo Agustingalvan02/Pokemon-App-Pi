@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./cardDetail.css"
 import PokeDexW from "../../image/PokeDexWallpaper.jpg"
+import missigno from "../../image/png-transparent-pokemon-red-and-blue-pokemon-x-and-y-pokemon-firered-and-leafgreen-pokemon-sun-and-moon-pokemon-go-pokemon-go-purple-angle-rectangle.png"
 export default function CardDetail(props) {
   const dispatch = useDispatch();
   let pokeDetail = useSelector((state) => state.detail);
@@ -43,7 +44,23 @@ export default function CardDetail(props) {
       </Link>
           </main>
         ) : (
-          <div>404</div>
+          <div className="containerDetail">
+              <h2 className="idP">id:??</h2>
+              <img className="imgPoke"  src={missigno} alt="no pokeimage" />
+              <div className="data1">
+              <h2>MissingNo.</h2> <br />
+              <h2>TIPO: None</h2>
+              </div>
+              <div className="data2">
+              <h2>ATK 136</h2>
+              <h2>DEF 0</h2>
+              <h2>SPD 29</h2>
+              </div>
+              <div className="data2">
+              <h2>HT 33</h2>
+              <h2>WT 22</h2>
+              </div>
+            </div>
         )}
       </div>
     </div>
