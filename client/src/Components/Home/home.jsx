@@ -25,12 +25,10 @@ export default function Home() {
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
   const indexofLastPokemon = currentPage * pokemonsPerPage;
   const indexofFirstPokemon = indexofLastPokemon - pokemonsPerPage;
-
   const currentPokemon = allPokemons.slice(
     indexofFirstPokemon,
     indexofLastPokemon
   );
-
   console.log("Que tiene current Pages: ", currentPage)
   const [renderPage, setRenderPage] = useState(" ");
   const paginado = (pageNumber) => {
