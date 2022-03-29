@@ -36,7 +36,7 @@ export function searchByName(name) {
 
 
 export function PokemonDetail(id) {
-  
+  console.log("Que es id?: ", id);
   return async function (dispatch) {
     let response = await axios.get("/pokemons/" + id);
     return dispatch({
