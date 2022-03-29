@@ -32,3 +32,10 @@
   font-size: 20px;
   margin-top: -12px
 }
+
+.buttonVolver{
+  background-color: #f93433 ;
+  font-family: 'VT323', monospace;
+  color: white;
+  font-size: 15px;
+}

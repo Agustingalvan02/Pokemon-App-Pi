@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { postPokemon, getTypes } from "../../Actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 // import BackgroundPoke from "../../image/BackGroundFond.jpg"
 // import NavBar from "../NavBar/nav";
 import "./createPokemon.css";
@@ -220,8 +221,13 @@ export default function CreatePokemon() {
             <br />
           </div>
            
-          <button type="submit">Crear Pokémon!</button>
+          <button className="buttonCreate" type="submit">Crear Pokémon!</button>
           {/* <button disabled type="submit">Rellena los campos!</button> */}
+          <Link to={"/home"}>
+        <button className="buttonVolverForm">
+          Volver!
+        </button>
+      </Link>
         </form>
       </div>
     </div>
