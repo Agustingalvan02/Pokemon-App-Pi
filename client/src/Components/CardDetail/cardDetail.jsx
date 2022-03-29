@@ -22,7 +22,7 @@ export default function CardDetail(props) {
           <main>
             <div className="containerDetail">
               <h2 className="idP">id:{pokeDetail[0].id}</h2>
-              <img className="imgPoke"  src={pokeDetail[0].img} alt="no pokeimage" />
+              <img className="imgPoke" srcset={missigno}  src={pokeDetail[0].img}   alt="no pokeimage" />
               <div className="data1">
               <h2>{pokeDetail[0].name}</h2> <br />
               <h2>TIPO:{pokeDetail[0].types + " "}</h2>
