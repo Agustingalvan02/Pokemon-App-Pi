@@ -120,7 +120,7 @@ export default function CreatePokemon() {
             <input
               className="inputForm"
               type="text"
-              value={input.name}
+              value={input.name.toLowerCase()}
               name="name"
               onChange={(e) => handleChange(e)}
             />
