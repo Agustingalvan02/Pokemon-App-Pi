@@ -76,7 +76,7 @@ export default function Home() {
         <NavBar />
         <div>
           <div className="filtros">
-            <select onChange={(e) => handleFilterByName(e)}>
+            <select className="selectFiltros" onChange={(e) => handleFilterByName(e)}>
               <option value="default" hidden>
                 -Selección Alfabética-
               </option>
@@ -85,7 +85,7 @@ export default function Home() {
             </select>
           </div>
           <div className="filtros">
-            <select onChange={(e) => handleFilterByTypes(e)}>
+            <select className="selectFiltros" onChange={(e) => handleFilterByTypes(e)}>
               <option value="default" hidden>
                 -Selección De Tipos-
               </option>
@@ -101,7 +101,7 @@ export default function Home() {
         </div>
         <div className="filterContainer">
           <div className="filtros">
-            <select onChange={(e) => handleFilterByAttack(e)}>
+            <select className="selectFiltros" onChange={(e) => handleFilterByAttack(e)}>
               <option value="default" hidden>
                 -Mayor/Menor Ataque-
               </option>
@@ -110,7 +110,7 @@ export default function Home() {
             </select>
           </div>
           <div className="filtros">
-            <select onChange={(e) => handleFilterByApiOrDb(e)}>
+            <select className="selectFiltros" onChange={(e) => handleFilterByApiOrDb(e)}>
               <option value="default" hidden>
                 -Existentes/Creados-
               </option>

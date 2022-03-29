@@ -154,7 +154,7 @@ const getPokemonbyId = async (id) => {
       };
 
       return pokeDbId;
-    } else if(id.length<=40){
+    } else {
       const searchPokebyId = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id}`
       );

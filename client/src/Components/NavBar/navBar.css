@@ -19,7 +19,8 @@
 .linkStyle{
     display: flex;
   color: white;
-  background-color: black;
+  background-color:  #d72554 ;
+   border-radius: 50px;
   text-align: center;
   justify-content: space-between;
   padding: 14px 16px;

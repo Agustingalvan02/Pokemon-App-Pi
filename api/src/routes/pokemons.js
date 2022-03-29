@@ -11,31 +11,25 @@ const {
 const router = Router();
 
 router.get("/", async (req, res) => {
-  
-    const {name}  = req.query;
-    if (name) {
-      let pokename = await getPokemonApiName(name);
-       pokename=[pokename]
-       pokename.length
-        ?res.status(200).send(pokename)
-       :res.send({error: 'Pokemon not found'});
-    } else {
-      res.status(200).send(await getAllPokemonData());
-    }
- 
+  const { name } = req.query;
+  if (name) {
+    let pokename = await getPokemonApiName(name);
+    pokename = [pokename];
+    pokename.length
+      ? res.status(200).send(pokename)
+      : res.send({ error: "Pokemon not found" });
+  } else {
+    res.status(200).send(await getAllPokemonData());
+  }
 });
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   const pokeId = await getPokemonbyId(id);
-    if (pokeId){
-      if(pokeId.id<=40)
-      return res.status(200).send(pokeId);
-    }
-     else{
-       res.send("../404/PsyduckPC404.jpg");
-     }
-  
+  if (pokeId) return res.status(200).send(pokeId);
+  else {
+    res.send("../404/PsyduckPC404.jpg");
+  }
 });
 
 router.post("/", async (req, res) => {

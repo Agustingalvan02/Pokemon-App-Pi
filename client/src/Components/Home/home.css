@@ -35,3 +35,23 @@
   .Cards{
     font-family: 'Roboto', sans-serif;
   }
+
+  .selectFiltros{
+    background-color:  #d72554 ;
+    color:white
+  }
+
+  .refreshButton{
+    display: flex;
+    color: white;
+    background-color:  #d72554 ;
+     border-radius: 50px;
+    text-align: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Shippori Antique B1', sans-serif;
+    font-size: 15px;
+    margin-left: 362px
+  }
+  
