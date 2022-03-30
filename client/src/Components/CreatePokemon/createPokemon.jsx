@@ -100,12 +100,12 @@ export default function CreatePokemon() {
       setInput({
         name: "",
         sprites: " ",
-        healthPoints: 0,
-        attack: 0,
-        defense: 0,
-        speed: 0,
-        height: 0,
-        weight: 0,
+        healthPoints: "",
+        attack: "",
+        defense: "",
+        speed: "",
+        height: "",
+        weight: "",
         types: [],
       });
       history.push("/home");

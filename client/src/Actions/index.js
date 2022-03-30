@@ -11,13 +11,12 @@ export function getPokemons() {
 }
 
 export function getTypes() {
-  return async function (dispatch) {
-    var response = await axios.get("/types");
-
+  return  async function (dispatch) {
+    const response = await axios.get("/types");
     return dispatch({
       type: "GET_TYPES",
       payload: response.data,
-    });
+    }); 
   };
 }
 

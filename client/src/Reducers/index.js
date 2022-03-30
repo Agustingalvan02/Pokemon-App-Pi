@@ -4,6 +4,7 @@ const initialState = {
   pokeTypes: [],
   detail: [],
   newPokemon: [],
+  filter:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -41,23 +42,40 @@ export default function rootReducer(state = initialState, action) {
           }
     case "FILTER_BY_TYPES":
       // const pokemons = state.allPokemons;
-
-      let pokemons = pokeCopy;
-      const typePokemons =
-        action.payload === "Todos"
-          ? pokemons
-          :
-            pokemons.filter(
-              (e) =>
-                e.types.map((type) => type)[0] === action.payload ||
-                e.types.map((type) => type)[1] === action.payload
-            );
       
+      if (!state.filter[0]) {
+        
+        let pokemons = pokeCopy;
+        const typePokemons =
+          action.payload === "Todos"
+            ? pokemons
+            :
+              pokemons.filter(
+                (e) =>
+                  e.types.map((type) => type)[0] === action.payload ||
+                  e.types.map((type) => type)[1] === action.payload
+              );
+        
+  
+        return {
+          ...state,
+          pokemons: typePokemons,
+        };
+      }
+      else{
+        let pokemonsFilterDb = state.filter;
+        const typePokemonsDb =
 
-      return {
-        ...state,
-        pokemons: typePokemons,
-      };
+            pokemonsFilterDb.filter(
+                (e) =>
+                  e.types.map((type) => type)[0] === action.payload ||
+                  e.types.map((type) => type)[1] === action.payload
+              );
+        return {
+          ...state,
+          pokemons: typePokemonsDb,
+        };
+      }
     case "FILTER_BY_NAME":
       const PokemonFilteredByName =
         action.payload === "A-Z"
@@ -97,9 +115,12 @@ export default function rootReducer(state = initialState, action) {
       };
     case "FILTER_BY_API_DB":
       const filtrado = action.payload === 'Database'? state.allPokemons.filter(el => typeof el.id !== 'number') : state.allPokemons.filter(el=> typeof el.id === 'number') ;
+      const filterDb=action.payload === 'Todos'? state.allPokemons : filtrado
+      console.log("Que tiene adentro filter?",filterDb)
       return {
           ...state,
-          pokemons: action.payload === 'Todos'? state.allPokemons : filtrado
+          pokemons: action.payload === 'Todos'? state.allPokemons : filtrado,
+          filter:filterDb
       }
     default:
       return state;
