@@ -128,7 +128,7 @@ const getPokemonApiName = async (name) => {
 
 const getPokemonbyId = async (id) => {
   console.log("Que tamaño tiene id cuando va a db?: ", id.length)
-    if (id.length > 2) {
+    if (id.length > 3) {
       const searchPokeDb = await Pokemon.findOne({
         where: { id },
         include: {
