@@ -30,7 +30,7 @@ function formValidation(input) {
   if (input.weight < 0 || input.weight > 100) {
     formErrors.defense = "El peso debe ser entre 1 y 100";
   }
-  if (input.types.length === 0) {
+  if (input.types.length > 2) {
     formErrors.types = "Solo debes elegir 2 tipos!";
   }
   if (!input.img) {
@@ -73,6 +73,7 @@ export default function CreatePokemon() {
     console.log(e);
   }
   function handleDelete(e) {
+    
     setInput({
       ...input,
       types: input.types.filter((type) => type !== e),
@@ -90,7 +91,8 @@ export default function CreatePokemon() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (Object.values(formErrors).length > 0 || input.name === "") {
+    console.log("Verificando que ande:",input,formErrors)
+    if (Object.values(formErrors).length > 0 || input.name==="") {
       alert("Porfavor rellena los campos requeridos!");
     } else {
       dispatch(postPokemon(input));
@@ -120,7 +122,7 @@ export default function CreatePokemon() {
             <input
               className="inputForm"
               type="text"
-              value={input.name.toLowerCase()}
+              value={input.name}
               name="name"
               onChange={(e) => handleChange(e)}
             />
@@ -211,7 +213,9 @@ export default function CreatePokemon() {
                   <option value={poketypes} key={poketypes}>
                     {poketypes}
                   </option>
+                  
                 ))}
+                {formErrors.types && <p>{formErrors.types}</p>}
             </select>
             <div className="div">
               {input.types.map((el) => {

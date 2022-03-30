@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -26,19 +25,28 @@ export default function Home() {
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
   const indexofLastPokemon = currentPage * pokemonsPerPage;
   const indexofFirstPokemon = indexofLastPokemon - pokemonsPerPage;
-  const currentPokemon = allPokemons.slice(
-    indexofFirstPokemon,
-    indexofLastPokemon
-  );
-  console.log("Que tiene current Pages: ", currentPage)
-  const [renderPage, setRenderPage] = useState(" ");
+  const [renderPage, setRenderPage] = useState();
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  
+  const currentPokemon = allPokemons.slice(
+    indexofFirstPokemon,
+    indexofLastPokemon
+  ); 
+  
+
 
   useEffect(() => {
-    dispatch(getTypes());
-  }, [dispatch]);
+    dispatch(getTypes())
+    setRenderPage(allPokemons);
+    setCurrentPage(1);
+  }, [dispatch,allPokemons]);
+  
+  // useEffect(() => {
+  //   setRenderPage(allPokemons);
+  //   setCurrentPage(1)
+  // }, [allPokemons]);
 
   function handleClick(e) {
     e.preventDefault();
@@ -91,7 +99,7 @@ export default function Home() {
               </option>
               <option value="Todos">Todos </option>
               {types &&
-                types?.map((poketypes) => (
+                types.map((poketypes) => (
                   <option value={poketypes} key={poketypes}>
                     {poketypes}
                   </option>

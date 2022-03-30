@@ -11,7 +11,7 @@ import CardDetail from "./Components/CardDetail/cardDetail";
 // import PokeLogo from './image/PokemonLogo.png';
 function App() {
   const dispatch = useDispatch();
-
+  
 
   useEffect(() => {
     dispatch(getPokemons());
