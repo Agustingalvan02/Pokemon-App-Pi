@@ -57,7 +57,6 @@ export default function rootReducer(state = initialState, action) {
         };
       } else {
         // let pokemons = pokeCopy;
-        console.log("Que tiene adentro el filter?",state.filter)
         let pokemonsFilterDb = state.filter;
         const typePokemonsDb =
           action.payload === "Todos"

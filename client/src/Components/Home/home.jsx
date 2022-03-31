@@ -43,19 +43,27 @@ export default function Home() {
     setCurrentPage(1);
   }, [dispatch,allPokemons]);
   
-  // useEffect(() => {
-  //   setRenderPage(allPokemons);
-  //   setCurrentPage(1)
-  // }, [allPokemons]);
-
+  
   function handleClick(e) {
     e.preventDefault();
     dispatch(getPokemons());
+    var dropDownOne = document.getElementById("valueFiltersAt");
+    dropDownOne.selectedIndex = "default";
+    
+    var dropDownTwo = document.getElementById("valueFiltersAZ");
+    dropDownTwo.selectedIndex = "default";
+
+    var dropDownThree = document.getElementById("valueFiltersType");
+    dropDownThree.selectedIndex = "default";
+
+    var dropDownFour = document.getElementById("valueFiltersADB");
+    dropDownFour.selectedIndex = "default";
   }
   function handleFilterByAttack(e) {
     e.preventDefault();
     dispatch(filterByAttack(e.target.value));
     setRenderPage(e.target.value);
+   
   }
   function handleFilterByName(e) {
     e.preventDefault();
@@ -75,8 +83,8 @@ export default function Home() {
   }
 
   
-   const respuesta= useSelector(state=>state.pokemons)
-   console.log(respuesta);
+  //  const respuesta= useSelector(state=>state.pokemons)
+  //  console.log(respuesta);
     return (
       <div>
         {allPokemons&&allPokemons!=="Pokemon not found"? 
