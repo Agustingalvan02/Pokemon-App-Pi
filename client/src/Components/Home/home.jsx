@@ -75,16 +75,17 @@ export default function Home() {
   }
 
   
-   
+   const respuesta= useSelector(state=>state.pokemons)
+   console.log(respuesta);
     return (
       <div>
-        {allPokemons&&allPokemons[0]!==null? 
+        {allPokemons&&allPokemons!=="Pokemon not found"? 
       <div className="container">
 
         <NavBar />
         <div>
           <div className="filtros">
-            <select autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByName(e)}>
+            <select id="valueFiltersAZ" className="selectFiltros" onChange={(e) => handleFilterByName(e)}>
               <option value="default" hidden>
                 -Selección Alfabética-
               </option>
@@ -93,8 +94,8 @@ export default function Home() {
             </select>
           </div>
           <div className="filtros">
-            <select autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByTypes(e)}>
-              <option value="default" hidden>
+            <select  id="valueFiltersType" autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByTypes(e)}>
+              <option defaultValue="-Selección De Tipos-" hidden>
                 -Selección De Tipos-
               </option>
               <option value="Todos">Todos </option>
@@ -109,17 +110,17 @@ export default function Home() {
         </div>
         <div className="filterContainer">
           <div className="filtros">
-            <select autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByAttack(e)}>
-              <option value="default" hidden>
-                -Mayor/Menor Ataque-
+            <select id="valueFiltersAt" autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByAttack(e)}>
+              <option defaultValue="-Mayor/Menor Ataque-" value="default" hidden>
+                 -Mayor/Menor Ataque-
               </option>
               <option value="ascendente"> Mayor Ataque </option>
               <option value="descendente"> Menor Ataque </option>
             </select>
           </div>
           <div className="filtros">
-            <select autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByApiOrDb(e)}>
-              <option value="default" hidden>
+            <select id="valueFiltersADB"autoComplete="off" className="selectFiltros" onChange={(e) => handleFilterByApiOrDb(e)}>
+              <option defaultValue="-Existentes/Creados-"value="default" hidden>
                 -Existentes/Creados-
               </option>
               <option value="Todos"> Todos </option>

@@ -12,14 +12,24 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
-  if (name) {
-    let pokename = await getPokemonApiName(name);
-    pokename = [pokename];
-    pokename.length
-      ? res.status(200).send(pokename)
-      : res.send({ error: "Pokemon not found" });
-  } else {
-    res.status(200).send(await getAllPokemonData());
+  // if (name) {
+  //   let pokename = await getPokemonApiName(name);
+  //   pokename = [pokename];
+  //   pokename.length
+  //     ? res.status(200).send(pokename)
+  //     : res.send({ error: "Pokemon not found" });
+  // } else {
+  //   res.status(200).send(await getAllPokemonData());
+  // }
+  const allPokemons= await getAllPokemonData()
+  if(name){
+    const pokeName= await allPokemons.filter((e)=>e.name.toLowerCase().includes(name.toLowerCase()))
+    pokeName.length
+    ? res.status(200).send(pokeName)
+    : res.send("Pokemon not found")
+
+  } else{
+    res.status(200).send(allPokemons)
   }
 });
 

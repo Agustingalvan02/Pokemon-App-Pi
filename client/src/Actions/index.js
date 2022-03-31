@@ -21,6 +21,7 @@ export function getTypes() {
 }
 
 export function searchByName(name) {
+
   return async function (dispatch) {
       var response = await axios.get(
         `/pokemons?name=${name}`
@@ -29,8 +30,8 @@ export function searchByName(name) {
         type: "SEARCH_POKEMON_NAME",
         payload: response.data,
       });
-    
     }
+    
   };
 
 

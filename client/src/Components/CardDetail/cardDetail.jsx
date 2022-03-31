@@ -13,7 +13,7 @@ export default function CardDetail(props) {
   }, [dispatch, props.match.params.id]);
 
   
-
+ console.log("el id vale?: ",pokeDetail)
   return (
     <div className="backgroundCard">
       <div >
@@ -33,8 +33,8 @@ export default function CardDetail(props) {
               <h2>SPD {pokeDetail[0].speed}</h2>
               </div>
               <div className="data2">
-              <h2>HT {pokeDetail[0].height}</h2>
-              <h2>WT {pokeDetail[0].weight}</h2>
+              <h2>HT {Math.floor(pokeDetail[0].height)/10}</h2>
+              <h2>WT {Math.floor(pokeDetail[0].weight)/10}</h2>
               </div>
             </div>
       <Link to={"/home"}>
