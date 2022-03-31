@@ -4,13 +4,14 @@ const initialState = {
   pokeTypes: [],
   detail: [],
   newPokemon: [],
-  filter:[]
+  filter: [],
 };
 
 export default function rootReducer(state = initialState, action) {
   const pokeCopy = state.allPokemons;
   switch (action.type) {
     case "GET_POKEMONS":
+      state.filter=[]
       return {
         ...state,
         pokemons: action.payload,
@@ -23,11 +24,9 @@ export default function rootReducer(state = initialState, action) {
         detail: [],
       };
     case "SEARCH_POKEMON_NAME":
-
       return {
         ...state,
         pokemons: action.payload,
-        
       };
     case "POST_POKEMON":
       return {
@@ -35,47 +34,46 @@ export default function rootReducer(state = initialState, action) {
         newPokemon: action.payload,
       };
 
-      case "POKEMON_DETAIL":
-          return{
-            ...state,
-            detail:[action.payload]
-          }
+    case "POKEMON_DETAIL":
+      return {
+        ...state,
+        detail: [action.payload],
+      };
     case "FILTER_BY_TYPES":
-      // const pokemons = state.allPokemons;
-      
       if (!state.filter[0]) {
-        
         let pokemons = pokeCopy;
         const typePokemons =
           action.payload === "Todos"
             ? pokemons
-            :
-              pokemons.filter(
+            : pokemons.filter(
                 (e) =>
                   e.types.map((type) => type)[0] === action.payload ||
                   e.types.map((type) => type)[1] === action.payload
               );
-        
-  
+
         return {
           ...state,
           pokemons: typePokemons,
         };
-      }
-      else{
+      } else {
+        // let pokemons = pokeCopy;
+        console.log("Que tiene adentro el filter?",state.filter)
         let pokemonsFilterDb = state.filter;
         const typePokemonsDb =
-
-            pokemonsFilterDb.filter(
-                (e) =>
-                  e.types.map((type) => type)[0] === action.payload ||
-                  e.types.map((type) => type)[1] === action.payload
-              );
+          action.payload === "Todos"
+          ? pokemonsFilterDb
+          : pokemonsFilterDb.filter(
+              (e) =>
+                e.types.map((type) => type)[0] === action.payload ||
+                e.types.map((type) => type)[1] === action.payload
+            )
         return {
           ...state,
           pokemons: typePokemonsDb,
         };
       }
+
+      
     case "FILTER_BY_NAME":
       const PokemonFilteredByName =
         action.payload === "A-Z"
@@ -114,14 +112,18 @@ export default function rootReducer(state = initialState, action) {
         pokemons: PokemonsFilteredByAttack,
       };
     case "FILTER_BY_API_DB":
-      const filtrado = action.payload === 'Database'? state.allPokemons.filter(el => typeof el.id !== 'number') : state.allPokemons.filter(el=> typeof el.id === 'number') ;
-      const filterDb=action.payload === 'Todos'? state.allPokemons : filtrado
-      console.log("Que tiene adentro filter?",filterDb)
+      const filtrado =
+        action.payload === "Database"
+          ? state.allPokemons.filter((el) => typeof el.id !== "number")
+          : state.allPokemons.filter((el) => typeof el.id === "number");
+      const filterDb =
+        action.payload === "Todos" ? state.allPokemons : filtrado;
+      console.log("Que tiene adentro filter?", filterDb);
       return {
-          ...state,
-          pokemons: action.payload === 'Todos'? state.allPokemons : filtrado,
-          filter:filterDb
-      }
+        ...state,
+        pokemons: action.payload === "Todos" ? state.allPokemons : filtrado,
+        filter: filterDb,
+      };
     default:
       return state;
   }
